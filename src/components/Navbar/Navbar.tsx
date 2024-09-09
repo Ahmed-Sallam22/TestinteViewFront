@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,17 +6,13 @@ const Navbar: React.FC = () => {
   const navigate=useNavigate()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem('TestInterView');
-    setToken(storedToken);
-  }, []);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const handleSignOut = () => {
     localStorage.removeItem('TestInterView');
     navigate('/')
-    setToken(null);
   };
   return (
     <>
@@ -36,7 +32,7 @@ const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {token && (
+          {localStorage.getItem('TestInterView')&& (
             <div className="hidden md:flex justify-end items-center border-2 border-black">
               <button   onClick={handleSignOut} className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
                 Sign out
@@ -46,7 +42,7 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {isMenuOpen && token && (
+      {isMenuOpen &&localStorage.getItem('TestInterView') && (
         <div className="col-span-12 flex justify-end mt-2 md:hidden">
           <button             onClick={handleSignOut}
  className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 w-full rounded-md transition-colors duration-200">

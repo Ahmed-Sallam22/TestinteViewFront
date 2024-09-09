@@ -33,6 +33,7 @@ const Login: React.FC = () => {
     try {
 
         const response = await Adminlogin(values).unwrap();
+        console.log(response?.data?.token);
         localStorage.setItem('TestInterView',response?.data?.token)
         dispatch(setRole(response?.data?.role));
         navigate('home');
